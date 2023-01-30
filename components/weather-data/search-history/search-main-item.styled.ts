@@ -6,6 +6,7 @@ export const SearchMainItemStyled = styled.div`
   flex-direction: column;
   padding: 32px;
   gap: 32px;
+  min-height: 450px;
   background: var(--color-black);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 
@@ -63,9 +64,10 @@ export const SearchMainItemStyled = styled.div`
   }
 
   .search-main-item__status {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 22px;
+    line-height: 26px;
     color: var(--color-white-60);
+    text-transform: lowercase;
   }
 
   .search-main-item__stats {
@@ -88,6 +90,12 @@ export const SearchMainItemStyled = styled.div`
       text-align: center;
     }
 
+    .search-main-item__stats__postfix {
+      font-size: 16px;
+      line-height: 30px;
+      color: var(--color-white-60);
+    }
+
     .search-main-item__stats__value {
       font-size: 26px;
       line-height: 30px;
@@ -101,6 +109,11 @@ export const SearchMainItemStyled = styled.div`
     }
   }
 
+  .search-main-item__error {
+    text-align: center;
+    color: var(--color-white-80);
+  }
+
   .button-icon {
     width: 24px;
     height: 24px;
@@ -108,5 +121,10 @@ export const SearchMainItemStyled = styled.div`
     position: absolute;
     top: 12px;
     right: 12px;
+  }
+
+  &.error {
+    align-items: center;
+    justify-content: center;
   }
 `
