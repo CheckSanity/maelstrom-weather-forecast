@@ -1,3 +1,6 @@
+@import "../fonts/roboto/stylesheet.css";
+@import "../fonts/josefin-sans/stylesheet.css";
+
 html, body, input, textarea {
   font-family: var(--font-primary);
 }
@@ -5,6 +8,10 @@ html, body, input, textarea {
 html, body {
   background: var(--color-background);
   color: var(--color-text);
+}
+
+strong {
+  font-weight: 500;
 }
 
 .title-lg {
