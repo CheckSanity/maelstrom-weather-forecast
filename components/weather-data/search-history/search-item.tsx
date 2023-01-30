@@ -7,9 +7,10 @@ const SearchItem: FC<{
   city: string
   temperature: string
   icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
+  onClick: () => void
 }> = (props) => {
   return (
-    <SearchItemStyled>
+    <SearchItemStyled onClick={props.onClick}>
       <div className={`search-item__info`}>
         <span className={`search-item__title`}>
           <strong>{props.city}</strong>, {props.country}

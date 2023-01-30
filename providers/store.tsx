@@ -32,8 +32,18 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
   const [cookie, setCookie, removeCookie] = useCookies()
 
   const addForecast = (forecast: Forecast) => {
-    const currentForecasts = cookie.forecasts || []
-    currentForecasts.push(forecast)
+    let currentForecasts = cookie.forecasts || []
+
+    if (currentForecasts.length > 0) {
+      currentForecasts = currentForecasts.filter(
+        (currentForecast: Forecast) =>
+          currentForecast.latitude != forecast.latitude &&
+          currentForecast.longitude != forecast.longitude
+      )
+    }
+
+    currentForecasts.unshift(forecast)
+
     setCookie('forecasts', currentForecasts, { path: '/' })
     setForecasts(currentForecasts)
   }
@@ -46,7 +56,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const updatedForecasts = currentForecasts.filter(
       (forecast: Forecast) =>
-        forecast.latitude == latitude && forecast.longitude
+        forecast.latitude != latitude && forecast.longitude != longitude
     )
 
     setCookie('forecasts', updatedForecasts, { path: '/' })

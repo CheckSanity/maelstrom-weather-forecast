@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const SearchMainItemStyled = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 32px;
@@ -98,5 +99,14 @@ export const SearchMainItemStyled = styled.div`
       line-height: 19px;
       color: var(--color-white-60);
     }
+  }
+
+  .button-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
   }
 `

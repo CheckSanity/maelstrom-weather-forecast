@@ -11,6 +11,7 @@ export const SearchResultsContainer = styled.div`
   background: var(--color-black);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
   transform: translateY(100%);
+  z-index: 9;
 
   .search-result__empty {
     width: 100%;
