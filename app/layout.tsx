@@ -6,9 +6,6 @@ import React from 'react'
 import StyledComponentsRegistry from '@/lib/registry'
 import { Josefin_Sans, Roboto } from '@next/font/google'
 
-
-import Sidebar from '@/components/common/sidebar/siderbar'
-
 const roboto = Roboto({
   weight: ['300', '400', '500'],
   style: ['normal'],
@@ -29,7 +26,7 @@ export default function RootLayout({ children }: {
     <head />
     <body>
     <StyledComponentsRegistry>
-      <div><Sidebar />{children}</div>
+      {children}
     </StyledComponentsRegistry>
     </body>
     </html>
