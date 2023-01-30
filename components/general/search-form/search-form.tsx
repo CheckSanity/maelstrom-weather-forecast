@@ -7,9 +7,11 @@ import SearchResults, {
 } from '@/components/general/search-form/search-results'
 import { SearchFormContainer } from '@/components/general/search-form/search-form.styled'
 import SearchField from '@/components/common/fields/search-field'
+import { useStore } from '@/providers/store'
 
 const SearchForm: FC<{}> = () => {
   const api = useOpenMeteoApi()
+  const store = useStore()
   const [searching, setSearching] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [results, setResults] = useState<SearchResultData[] | undefined>()
@@ -29,7 +31,7 @@ const SearchForm: FC<{}> = () => {
       setResults(
         response.value.results?.map((item) => {
           return {
-            name: item.name,
+            city: item.name,
             country: item.country,
             latitude: item.latitude,
             longitude: item.longitude,
@@ -61,7 +63,12 @@ const SearchForm: FC<{}> = () => {
           items={results}
           onClickOutside={() => setShowResults(false)}
           onSelect={(item) => {
-            alert(item.name)
+            store.addForecast({
+              country: item.country,
+              city: item.city,
+              latitude: item.latitude,
+              longitude: item.longitude,
+            })
             setShowResults(false)
           }}
         />

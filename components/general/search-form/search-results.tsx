@@ -4,7 +4,7 @@ import Loader from '@/components/common/loader/loader'
 import { SearchResultsContainer } from '@/components/general/search-form/search-results.styled'
 
 export type SearchResultData = {
-  name: string
+  city: string
   country: string
   latitude: number
   longitude: number
@@ -30,7 +30,7 @@ const SearchResults: FC<{
               return (
                 <Item
                   key={index}
-                  name={item.name}
+                  city={item.city}
                   country={item.country}
                   onClick={() => {
                     props.onSelect(item)
@@ -56,13 +56,13 @@ const Empty = () => {
 }
 
 const Item: FC<{
-  name: string
+  city: string
   country: string
   onClick: () => void
 }> = (props) => {
   return (
     <div className={`search-result__item`} onClick={props.onClick}>
-      <span className={`search-result__item__city`}>{props.name},</span>
+      <span className={`search-result__item__city`}>{props.city},</span>
       <span className={`search-result__item__country`}> {props.country}</span>
     </div>
   )
