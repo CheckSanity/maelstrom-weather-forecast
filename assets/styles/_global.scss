@@ -1,0 +1,14 @@
+html, body, input, textarea {
+  font-family: var(--font-primary);
+}
+
+html, body {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+.title-lg {
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 42px;
+}
