@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 import { SearchFormContainer } from '@/components/general/search-form/search-form.styled'
 
-export const Parent = styled.header`
+export const HeaderStyled = styled.header`
   width: 100%;
   display: flex;
   flex-direction: row;
