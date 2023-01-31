@@ -1,6 +1,8 @@
 'use client'
 import React, {
   ChangeEvent,
+  ForwardedRef,
+  forwardRef,
   useCallback,
   useEffect,
   useMemo,
@@ -31,90 +33,93 @@ export interface PlainInputProps {
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void
   onChange?: (e: ChangeEvent<HTMLInputElement & HTMLSelectElement>) => void
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
-  inputRef?: React.RefObject<HTMLInputElement>
 }
 
-const PlainInput = (props: PlainInputProps) => {
-  const className = classNames(props.className, 'plain-input')
+const PlainInput = forwardRef(
+  (props: PlainInputProps, ref: ForwardedRef<HTMLInputElement>) => {
+    const className = classNames(props.className, 'plain-input')
 
-  const [value, setValue] = useState<string>(props.defaultValue || '')
+    const [value, setValue] = useState<string>(props.defaultValue || '')
 
-  useEffect(() => {
-    setValue(props.value || '')
-  }, [props.value])
+    useEffect(() => {
+      setValue(props.value || '')
+    }, [props.value])
 
-  const clickHandler = useCallback(
-    (e: MouseEvent | TouchEvent) => {
-      if (props.onClick) {
-        props.onClick(e)
-      }
-    },
-    [props.onClick]
-  )
+    const clickHandler = useCallback(
+      (e: MouseEvent | TouchEvent) => {
+        if (props.onClick) {
+          props.onClick(e)
+        }
+      },
+      [props.onClick]
+    )
 
-  const focusHandler = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      console.log('on Focus')
-      if (props.onFocus) {
-        props.onFocus(e)
-      }
-    },
-    [props.onFocus]
-  )
+    const focusHandler = useCallback(
+      (e: React.FocusEvent<HTMLInputElement>) => {
+        if (props.onFocus) {
+          props.onFocus(e)
+        }
+      },
+      [props.onFocus]
+    )
 
-  const blurHandler = useCallback(
-    (e: React.FocusEvent<HTMLInputElement>) => {
-      if (props.onBlur) {
-        props.onBlur(e)
-      }
-    },
-    [props.onBlur]
-  )
+    const blurHandler = useCallback(
+      (e: React.FocusEvent<HTMLInputElement>) => {
+        if (props.onBlur) {
+          props.onBlur(e)
+        }
+      },
+      [props.onBlur]
+    )
 
-  const debounceActionHandler = (
-    e: ChangeEvent<HTMLInputElement & HTMLSelectElement>
-  ) => {
-    if (props.onDebounce) {
-      props.onDebounce.action(e)
-    }
+    const debounceActionHandler = useCallback(
+      (e: ChangeEvent<HTMLInputElement & HTMLSelectElement>) => {
+        if (props.onDebounce) {
+          props.onDebounce.action(e)
+        }
+      },
+      [props.onDebounce]
+    )
+
+    const debouncedHandler = useMemo(() => {
+      return debounce(debounceActionHandler, props.onDebounce?.timeout)
+    }, [])
+
+    const changeHandler = useCallback(
+      (e: ChangeEvent<HTMLInputElement & HTMLSelectElement>) => {
+        setValue(e.target.value)
+
+        debouncedHandler(e)
+
+        if (props.onChange) {
+          props.onChange(e)
+        }
+      },
+      [props.onChange]
+    )
+
+    return (
+      <input
+        ref={ref}
+        className={className}
+        id={props.id}
+        key={`plain-input-${props.name}`}
+        type={props.type}
+        name={props.name}
+        disabled={props.disabled}
+        placeholder={props.placeholder}
+        aria-label={props.ariaLabel}
+        required={props.required}
+        onClick={() => clickHandler}
+        onBlur={blurHandler}
+        onFocus={focusHandler}
+        onChange={changeHandler}
+        value={value}
+      />
+    )
   }
+)
 
-  const debouncedHandler = useMemo(() => {
-    return debounce(debounceActionHandler, props.onDebounce?.timeout)
-  }, [])
-
-  const changeHandler = useCallback(
-    (e: ChangeEvent<HTMLInputElement & HTMLSelectElement>) => {
-      setValue(e.target.value)
-
-      debouncedHandler(e)
-
-      if (props.onChange) {
-        props.onChange(e)
-      }
-    },
-    [props.onChange]
-  )
-
-  return (
-    <input
-      ref={props.inputRef}
-      className={className}
-      id={props.id}
-      key={`plain-input-${props.name}`}
-      type={props.type}
-      name={props.name}
-      disabled={props.disabled}
-      placeholder={props.placeholder}
-      aria-label={props.ariaLabel}
-      required={props.required}
-      onClick={() => clickHandler}
-      onBlur={blurHandler}
-      onFocus={focusHandler}
-      onChange={changeHandler}
-      value={value}
-    />
-  )
-}
+PlainInput.displayName = 'PlainInput'
 
 export default PlainInput

@@ -51,21 +51,21 @@
   }
 
   &:hover {
-    .icon {
+    > .icon {
       > svg {
-        fill: var(--rd-color-primary-active)
+        fill: var(--color-white-40)
       }
     }
   }
 
   &.button_active, &:active {
     &:before {
-      background: var(--rd-color-primary-5);
+      background: var(--color-black-alt);
     }
 
     .icon {
       > svg {
-        fill: var(--rd-color-primary);
+        fill: var(--color-white-60);
       }
     }
   }
@@ -73,7 +73,7 @@
   &:focus {
     .icon {
       > svg {
-        fill: var(--rd-color-primary-active);
+        fill: var(--color-white-60);
       }
     }
   }

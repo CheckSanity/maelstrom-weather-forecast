@@ -43,7 +43,6 @@ const SearchResults: FC<{
 }
 
 const Loading = () => {
-  // TODO Add loader
   return (
     <div className={'search-results__loading'}>
       <Loader />

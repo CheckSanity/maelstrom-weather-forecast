@@ -4,6 +4,8 @@ import WeatherTypeCell from '@/components/weather-data/weather-details/weather-t
 import { useHourlyWeather } from '@/api/swr'
 import { FC } from 'react'
 import moment from 'moment/moment'
+import Skeleton from '@/components/common/loader/skeleton'
+import { HourlyWeatherTableEmptyStyled } from '@/components/weather-data/weather-details/weather-table/hourly-weather-table.styled'
 
 type HourlyWeatherData = {
   time: string
@@ -85,7 +87,13 @@ const HourlyWeatherTable: FC<{
   ]
 
   if (loading) {
-    return <p>Loading</p>
+    return (
+      <HourlyWeatherTableEmptyStyled>
+        {[...Array(8)].map((x, i) => (
+          <Skeleton key={i} fullWidth={true} active={true} size={'lg'} />
+        ))}
+      </HourlyWeatherTableEmptyStyled>
+    )
   }
 
   if (!hourlyWeather) {

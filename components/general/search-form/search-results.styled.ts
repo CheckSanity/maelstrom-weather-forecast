@@ -37,6 +37,11 @@ export const SearchResultsContainer = styled.div`
     line-height: 19px;
     font-weight: 300;
     color: var(--color-white-60);
+
+    .loader {
+      width: 100px;
+      height: 100px;
+    }
   }
 
   .search-result__item {
