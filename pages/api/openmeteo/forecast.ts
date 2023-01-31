@@ -12,14 +12,30 @@ export default async function handler(
 ) {
   const api = new OpenMeteoApi()
 
-  const { latitude, longitude, current_weather } = req.query
-
   if (req.method !== 'GET') {
     return res.status(405)
   }
 
-  if (current_weather == 'true') {
-    return (await api.forecast.current(latitude as string, longitude as string))
+  console.log(req.query)
+
+  if (req.query.current_weather == 'true') {
+    return (
+      await api.forecast.current(
+        req.query.latitude as string,
+        req.query.longitude as string
+      )
+    )
+      .mapErr((error) => res.status(500).json(error))
+      .map((value) => res.status(200).json(value))
+  } else if (req.query.hourly !== undefined) {
+    return (
+      await api.forecast.hourly(
+        req.query.latitude as string,
+        req.query.longitude as string,
+        req.query.start_date as string,
+        req.query.end_date as string
+      )
+    )
       .mapErr((error) => res.status(500).json(error))
       .map((value) => res.status(200).json(value))
   }
