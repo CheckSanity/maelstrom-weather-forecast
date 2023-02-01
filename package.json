@@ -14,26 +14,25 @@
     "@types/react-dom": "18.0.10",
     "antd": "^5.1.7",
     "classnames": "^2.3.2",
-    "eslint": "8.33.0",
-    "eslint-config-next": "13.1.6",
     "isomorphic-unfetch": "^4.0.2",
     "lodash": "^4.17.21",
     "neverthrow": "^6.0.0",
     "next": "13.1.6",
     "react": "18.2.0",
-    "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
     "sass": "^1.57.1",
     "styled-components": "^5.3.6",
     "swr": "^2.0.3",
-    "typescript": "4.9.4",
     "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
+    "eslint": "8.33.0",
+    "eslint-config-next": "13.1.6",
     "@svgr/webpack": "^6.5.1",
     "@types/lodash": "^4.14.191",
     "@types/styled-components": "^5.1.26",
-    "prettier": "^2.8.3"
+    "prettier": "^2.8.3",
+    "typescript": "4.9.4"
   },
   "resolutions": {
     "styled-components": "^5"

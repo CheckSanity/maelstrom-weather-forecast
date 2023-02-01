@@ -10,10 +10,6 @@ export default function Home() {
     return <LoadingContent />
   }
   return (
-    <>
-      {(store.forecasts && store.forecasts.length > 0 && <MainContent />) || (
-        <WelcomeContent />
-      )}
-    </>
+    <>{(store.forecasts.length > 0 && <MainContent />) || <WelcomeContent />}</>
   )
 }

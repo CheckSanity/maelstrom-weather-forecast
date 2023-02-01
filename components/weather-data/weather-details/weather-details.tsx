@@ -12,10 +12,6 @@ const { RangePicker } = DatePicker
 const WeatherDetails: FC<{}> = (props) => {
   const store = useStore()
 
-  if (!store.forecasts || store.forecasts.length === 0) {
-    return <p>Whoops</p> // TODO Error state
-  }
-
   return (
     <WeatherDetailsStyled>
       <ConfigProvider
@@ -32,14 +28,10 @@ const WeatherDetails: FC<{}> = (props) => {
               date.isBefore(current) || current.add(16, 'days').isAfter(date)
             )
           }}
-          defaultValue={
-            (store.startDate &&
-              store.endDate && [
-                dayjs(new Date(store.startDate)),
-                dayjs(new Date(store.endDate)),
-              ]) ||
-            undefined
-          }
+          defaultValue={[
+            dayjs(new Date(store.startDate)),
+            dayjs(new Date(store.endDate)),
+          ]}
           picker="date"
           onChange={(date, strings) => {
             if (strings.length === 2) {
@@ -48,23 +40,20 @@ const WeatherDetails: FC<{}> = (props) => {
           }}
         />
       </ConfigProvider>
-      {(!store.startDate && !store.endDate && <p>Pick dates</p>) ||
-        (store.startDate &&
-          store.endDate &&
-          ((store.startDate === store.endDate && (
-            <HourlyWeatherTable
-              latitude={store.forecasts[0].latitude}
-              longitude={store.forecasts[0].longitude}
-              date={store.startDate}
-            />
-          )) || (
-            <DailyWeatherTable
-              latitude={store.forecasts[0].latitude}
-              longitude={store.forecasts[0].longitude}
-              startDate={store.startDate}
-              endDate={store.endDate}
-            />
-          )))}
+      {(store.startDate === store.endDate && (
+        <HourlyWeatherTable
+          latitude={store.forecasts[0].latitude}
+          longitude={store.forecasts[0].longitude}
+          date={store.startDate}
+        />
+      )) || (
+        <DailyWeatherTable
+          latitude={store.forecasts[0].latitude}
+          longitude={store.forecasts[0].longitude}
+          startDate={store.startDate}
+          endDate={store.endDate}
+        />
+      )}
     </WeatherDetailsStyled>
   )
 }

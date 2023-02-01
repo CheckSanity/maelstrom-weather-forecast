@@ -1,6 +1,5 @@
 'use client'
 import React, { useContext, useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
 import getValidDate from '@/utils/date-utils'
 
 interface Forecast {
@@ -14,9 +13,9 @@ interface IStoreContext {
   addForecast: (forecast: Forecast) => void
   removeForecast: (latitude: number, longitude: number) => void
   saveDates: (startDate: string, endDate: string) => void
-  startDate?: string
-  endDate?: string
-  forecasts?: Forecast[]
+  startDate: string
+  endDate: string
+  forecasts: Forecast[]
   loading: boolean
 }
 
@@ -30,6 +29,9 @@ const StoreContext = React.createContext<IStoreContext>({
   saveDates: () => {
     console.warn('Not implemented')
   },
+  forecasts: [],
+  startDate: '',
+  endDate: '',
   loading: true,
 })
 export const useStore = () => useContext(StoreContext)
@@ -38,13 +40,12 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [loading, setLoading] = useState(true)
-  const [startDate, setStartDate] = useState<string | undefined>()
-  const [endDate, setEndDate] = useState<string | undefined>()
-  const [forecasts, setForecasts] = useState<Forecast[] | undefined>()
-  const [cookie, setCookie, removeCookie] = useCookies()
-
+  const [startDate, setStartDate] = useState<string>('')
+  const [endDate, setEndDate] = useState<string>('')
+  const [forecasts, setForecasts] = useState<Forecast[]>([])
   const addForecast = (forecast: Forecast) => {
-    let currentForecasts = cookie.forecasts || []
+    let currentForecasts: Forecast[] =
+      (localStorage.forecasts && JSON.parse(localStorage.forecasts)) || []
 
     if (currentForecasts.length > 0) {
       currentForecasts = currentForecasts.filter(
@@ -56,12 +57,12 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
 
     currentForecasts.unshift(forecast)
 
-    setCookie('forecasts', currentForecasts, { path: '/' })
+    localStorage.setItem('forecasts', JSON.stringify(currentForecasts))
     setForecasts(currentForecasts)
   }
 
   const removeForecast = (latitude: number, longitude: number) => {
-    const currentForecasts = cookie.forecasts || []
+    const currentForecasts = localStorage.forecasts || []
     if (currentForecasts.length === 0) {
       return
     }
@@ -71,15 +72,15 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
         forecast.latitude != latitude && forecast.longitude != longitude
     )
 
-    setCookie('forecasts', updatedForecasts, { path: '/' })
+    localStorage.setItem('forecasts', currentForecasts)
     setForecasts(updatedForecasts)
   }
 
   const saveDates = (startDate: string, endDate: string) => {
-    setCookie('startDate', startDate, { path: '/' })
+    localStorage.setItem('startDate', startDate)
     setStartDate(startDate)
 
-    setCookie('endDate', endDate, { path: '/' })
+    localStorage.setItem('endDate', endDate)
     setEndDate(endDate)
   }
 
@@ -94,17 +95,16 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   useEffect(() => {
-    setForecasts(cookie.forecasts)
-
-    const startDate = cookie.startDate
-    if (startDate) {
-      setStartDate(getValidDate(startDate))
+    const forecasts = localStorage.forecasts
+    if (forecasts) {
+      setForecasts(JSON.parse(localStorage.forecasts))
     }
 
-    const endDate = cookie.endDate
-    if (endDate) {
-      setEndDate(getValidDate(endDate))
-    }
+    const startDate = localStorage.startDate
+    setStartDate(getValidDate(startDate))
+
+    const endDate = localStorage.endDate
+    setEndDate(getValidDate(endDate))
 
     setLoading(false)
   }, [])

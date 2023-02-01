@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
 
-export default function getValidDate(date: string): string {
+export default function getValidDate(date?: string): string {
   const currentDate = dayjs()
-  if (currentDate.isAfter(date)) {
+  if (!date || currentDate.isAfter(date)) {
     return currentDate.format('YYYY-MM-DD')
   } else {
     return date

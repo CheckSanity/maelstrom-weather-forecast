@@ -6,7 +6,6 @@ import './../assets/styles/_global.scss'
 
 import React from 'react'
 import StyledComponentsRegistry from '@/lib/registry'
-import { CookiesProvider } from 'react-cookie'
 import { StoreProvider } from '@/providers/store'
 
 export default function RootLayout({
@@ -18,11 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <CookiesProvider>
-          <StoreProvider>
-            <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-          </StoreProvider>
-        </CookiesProvider>
+        <StoreProvider>
+          <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        </StoreProvider>
       </body>
     </html>
   )
