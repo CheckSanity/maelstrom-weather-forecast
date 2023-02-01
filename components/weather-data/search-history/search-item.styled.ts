@@ -8,7 +8,7 @@ export const SearchItemStyled = styled.div`
   padding: 32px;
   gap: 24px;
   justify-content: space-between;
-  background: var(--color-black);
+  background: var(--color-background);
   box-shadow: var(--shadow-default);
   transition: background-color 0.2s ease;
 
@@ -22,9 +22,8 @@ export const SearchItemStyled = styled.div`
     gap: 6px;
   }
 
-  .search-item__temp,
   .search-item__title {
-    color: var(--color-white);
+    color: var(--color-text);
     font-weight: 300;
   }
 
@@ -32,11 +31,6 @@ export const SearchItemStyled = styled.div`
     font-size: 18px;
     line-height: 21px;
     text-transform: uppercase;
-  }
-
-  .search-item__temp {
-    font-size: 36px;
-    line-height: 42px;
   }
 
   .search-item__icon {

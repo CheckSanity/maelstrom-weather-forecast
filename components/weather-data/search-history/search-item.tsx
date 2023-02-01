@@ -31,7 +31,7 @@ const SearchItem: FC<{
         <span className={`search-item__title`}>
           <strong>{props.city}</strong>, {props.country}
         </span>
-        <span className={`search-item__temp`}>
+        <span className={`title-lg`}>
           {currentWeather?.current_weather.temperature}º
         </span>
       </div>

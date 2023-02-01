@@ -16,7 +16,6 @@ const SearchForm: FC<{}> = () => {
   const [showResults, setShowResults] = useState(false)
   const [results, setResults] = useState<SearchResultData[] | undefined>()
   const request = async (value: string) => {
-    console.log(`Searching for ${value}...`)
     if (value === '') {
       setShowResults(false)
       setSearching(false)

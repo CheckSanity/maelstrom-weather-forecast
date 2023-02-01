@@ -7,8 +7,8 @@ export const SearchMainItemStyled = styled.div`
   padding: 32px;
   gap: 32px;
   min-height: 450px;
-  background: var(--color-black);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  background: var(--color-background);
+  box-shadow: var(--shadow-default);
 
   .search-main-item__header {
     display: flex;
@@ -30,7 +30,7 @@ export const SearchMainItemStyled = styled.div`
     font-size: 24px;
     line-height: 28px;
     text-transform: uppercase;
-    color: var(--color-white);
+    color: var(--color-text);
   }
 
   .search-main-item__icon {
@@ -60,7 +60,7 @@ export const SearchMainItemStyled = styled.div`
   .search-main-item__temp {
     font-size: 56px;
     line-height: 66px;
-    color: var(--color-white);
+    color: var(--color-text);
   }
 
   .search-main-item__status {
@@ -99,7 +99,7 @@ export const SearchMainItemStyled = styled.div`
     .search-main-item__stats__value {
       font-size: 26px;
       line-height: 30px;
-      color: var(--color-white);
+      color: var(--color-text);
     }
 
     .search-main-item__stats__desc {

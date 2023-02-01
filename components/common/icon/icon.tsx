@@ -27,12 +27,13 @@ export const Icon = (props: IconProps) => {
     <span
       className={className}
       style={{
+        ...props.style,
         width: props.size || props.width,
         height: props.size || props.height,
-        ...props.style,
       }}
     >
-      {props.icon && <PlainIcon {...props.icon} /> || props.svg && <PlainIcon svg={props.svg} />}
+      {(props.icon && <PlainIcon {...props.icon} />) ||
+        (props.svg && <PlainIcon svg={props.svg} />)}
     </span>
   )
 }

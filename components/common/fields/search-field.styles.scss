@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: var(--color-black);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  background: var(--color-background);
+  box-shadow: var(--shadow-default);
   width: 100%;
   padding: 12px 18px;
 
@@ -16,8 +16,8 @@
     font-weight: 300;
     font-size: 24px;
     line-height: 28px;
-    background: var(--color-black);
-    color: var(--color-white);
+    background: var(--color-background);
+    color: var(--color-text);
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
@@ -25,9 +25,9 @@
     &:-webkit-autofill:focus {
       -webkit-background-clip: text;
       background-color: transparent !important;
-      color: var(--color-white) !important;
+      color: var(--color-text) !important;
       -webkit-box-shadow: 0 0 0 1000px var(--color-black) inset !important;
-      -webkit-text-fill-color: var(--color-white) !important;
+      -webkit-text-fill-color: var(--color-text) !important;
     }
 
     &::placeholder {
@@ -48,20 +48,6 @@
   &.icon {
     > svg {
       fill: var(--colow-white-20);
-    }
-  }
-}
-
-.search-field-button {
-  &.button-icon {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-
-    > .icon {
-      > svg {
-        fill: var(--color-white-60);
-      }
     }
   }
 }

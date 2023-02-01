@@ -6,7 +6,7 @@ import { SearchFormContainer } from '@/components/general/search-form/search-for
 export const WelcomeContentContainer = styled.main`
   width: 100vw;
   height: 100vh;
-  background: url('/background.jpg') var(--color-black) center no-repeat;
+  background: url('/background.jpg') var(--color-background) center no-repeat;
   background-size: cover;
   padding: 48px;
   display: flex;

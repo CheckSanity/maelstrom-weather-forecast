@@ -8,8 +8,8 @@ export const SearchResultsContainer = styled.div`
   height: 200px;
   max-height: 200px;
   overflow-y: auto;
-  background: var(--color-black);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  background: var(--color-background);
+  box-shadow: var(--shadow-default);
   transform: translateY(100%);
   z-index: 9;
 

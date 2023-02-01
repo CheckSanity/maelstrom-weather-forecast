@@ -6,6 +6,6 @@ export const WeatherTableLoadingStyled = styled.div`
   gap: 8px;
 
   .skeleton {
-    background: var(--color-black);
+    background: var(--color-background);
   }
 `

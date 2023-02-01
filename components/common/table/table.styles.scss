@@ -31,7 +31,7 @@
   > tr {
     > th {
       position: relative;
-      color: var(--color-white);
+      color: var(--color-text);
       font-weight: 500;
       font-size: 12px;
       line-height: 16px;
@@ -63,9 +63,9 @@
       position: relative;
       padding: 24px;
       overflow-wrap: break-word;
-      background: var(--color-black);
+      background: var(--color-background);
       font-weight: 300;
-      color: var(--color-white);
+      color: var(--color-text);
 
       &:first-child {
         padding-left: 36px;

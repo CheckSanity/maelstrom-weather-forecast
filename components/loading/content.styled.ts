@@ -10,7 +10,7 @@ export const LoadingContentStyled = styled.main`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: var(--color-black);
+  background: var(--color-background);
 
   .loader {
     width: 250px;
