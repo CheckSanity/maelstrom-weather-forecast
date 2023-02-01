@@ -1,0 +1,41 @@
+@import "../fonts/roboto/stylesheet.css";
+@import "../fonts/josefin-sans/stylesheet.css";
+
+html, body, input, textarea {
+  font-family: var(--font-primary);
+}
+
+html, body {
+  background: var(--color-background);
+  color: var(--color-text);
+}
+
+strong {
+  font-weight: 500;
+}
+
+.title-lg {
+  font-weight: 300;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.ant-picker-range {
+  background: var(--color-black-alt);
+  border: none;
+  border-radius: 0;
+  padding: 8px 24px;
+  height: 40px;
+}
+
+.ant-picker-input {
+  > input {
+    color: var(--color-text) !important;
+  }
+}
+
+.ant-picker-suffix {
+  svg {
+    fill: var(--color-white-40);
+  }
+}
