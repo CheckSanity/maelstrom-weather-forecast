@@ -23,3 +23,16 @@ export type ForecastHourlyUnits = {
   windspeed_10m: string
   winddirection_10m: string
 }
+
+export type ForecastDaily = {
+  time: string[]
+  temperature_2m_max: number[]
+  temperature_2m_min: number[]
+  weathercode: number[]
+}
+
+export type ForecastDailyUnits = {
+  time: string
+  temperature_2m_max: string
+  temperature_2m_min: string
+}

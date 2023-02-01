@@ -32,6 +32,16 @@ export default async function handler(
       await api.forecast.hourly(
         req.query.latitude as string,
         req.query.longitude as string,
+        req.query.start_date as string
+      )
+    )
+      .mapErr((error) => res.status(500).json(error))
+      .map((value) => res.status(200).json(value))
+  } else if (req.query.daily !== undefined) {
+    return (
+      await api.forecast.daily(
+        req.query.latitude as string,
+        req.query.longitude as string,
         req.query.start_date as string,
         req.query.end_date as string
       )
