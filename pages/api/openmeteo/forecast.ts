@@ -16,8 +16,6 @@ export default async function handler(
     return res.status(405)
   }
 
-  console.log(req.query)
-
   if (req.query.current_weather == 'true') {
     return (
       await api.forecast.current(

@@ -18,11 +18,11 @@ const SearchItem: FC<{
   )
 
   if (loading) {
-    return <p>Loading</p>
+    return <p>Loading</p> // TODO Loading state
   }
 
   if (!currentWeather) {
-    return <p>Error</p>
+    return <p>Error</p> // TODO Error state
   }
 
   return (

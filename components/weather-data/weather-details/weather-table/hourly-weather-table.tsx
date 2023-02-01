@@ -3,9 +3,8 @@ import { weatherCodeToType, WeatherType } from '@/utils/weather-utils'
 import WeatherTypeCell from '@/components/weather-data/weather-details/weather-table/weather-type-cell'
 import { useHourlyWeather } from '@/api/swr'
 import { FC } from 'react'
-import moment from 'moment/moment'
-import Skeleton from '@/components/common/loader/skeleton'
-import { HourlyWeatherTableEmptyStyled } from '@/components/weather-data/weather-details/weather-table/hourly-weather-table.styled'
+import WeatherTableLoading from '@/components/weather-data/weather-details/weather-table/weather-table-loading'
+import dayjs from 'dayjs'
 
 type HourlyWeatherData = {
   time: string
@@ -18,14 +17,12 @@ type HourlyWeatherData = {
 const HourlyWeatherTable: FC<{
   latitude: number
   longitude: number
-  startDate: string
-  endDate: string
+  date: string
 }> = (props) => {
   const { hourlyWeather, loading } = useHourlyWeather(
     props.latitude,
     props.longitude,
-    props.startDate,
-    props.endDate
+    props.date
   )
 
   const columns: IColumnType<HourlyWeatherData>[] = [
@@ -87,34 +84,25 @@ const HourlyWeatherTable: FC<{
   ]
 
   if (loading) {
-    return (
-      <HourlyWeatherTableEmptyStyled>
-        {[...Array(8)].map((x, i) => (
-          <Skeleton key={i} fullWidth={true} active={true} size={'lg'} />
-        ))}
-      </HourlyWeatherTableEmptyStyled>
-    )
+    return <WeatherTableLoading />
   }
 
   if (!hourlyWeather) {
-    return <p>Error</p>
+    return <p>Error</p> // TODO
   }
-
-  console.log(hourlyWeather)
 
   return (
     <Table
       columns={columns}
       data={hourlyWeather.hourly?.time.map((time, index) => {
         return {
-          time: moment(time).format('HH:mm'),
+          time: dayjs(time).format('HH:mm'),
           weatherType: weatherCodeToType(
             hourlyWeather.hourly?.weathercode[index]
           ),
           temperature: hourlyWeather.hourly?.temperature_2m[index].toString(),
           windSpeed: hourlyWeather.hourly?.windspeed_10m[index].toString(),
           humidity: hourlyWeather.hourly?.relativehumidity_2m[index].toString(),
-          surfacePressure: 'unknown',
         }
       })}
     />

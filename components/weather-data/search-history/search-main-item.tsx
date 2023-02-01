@@ -12,14 +12,7 @@ import {
   weatherTypeToIcon,
 } from '@/utils/weather-utils'
 import Skeleton from '@/components/common/loader/skeleton'
-
-function dayMonthFromDate(dateString: string): string {
-  const date = new Date(dateString)
-  console.log(date)
-  return `${date.getDate()} ${date.toLocaleString('default', {
-    month: 'long',
-  })}`
-}
+import { dayMonthFromDate } from '@/utils/date-utils'
 
 const SearchMainItem: FC<{
   city: string
