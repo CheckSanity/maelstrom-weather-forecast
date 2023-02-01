@@ -6,12 +6,17 @@ export const SearchHistoryStyled = styled.div`
   width: 450px;
 
   .search-history__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
     color: var(--color-white-80);
     margin-bottom: 8px;
     text-transform: uppercase;
+    height: 40px;
+    min-height: 40px;
   }
 
   .search-history__wrapper {

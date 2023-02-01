@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { WeatherDetailsStyled } from '@/components/weather-data/weather-details/weather-details.styled'
 import HourlyWeatherTable from '@/components/weather-data/weather-details/weather-table/hourly-weather-table'
 import { useStore } from '@/providers/store'
-import { DatePicker } from 'antd'
+import { ConfigProvider, DatePicker, theme } from 'antd'
 import DailyWeatherTable from '@/components/weather-data/weather-details/weather-table/daily-weather-table'
 import dayjs from 'dayjs'
 
@@ -18,29 +18,36 @@ const WeatherDetails: FC<{}> = (props) => {
 
   return (
     <WeatherDetailsStyled>
-      <RangePicker
-        disabledDate={(date) => {
-          // We can only get 16 days after today
-          const current = dayjs()
-          return !(
-            date.isBefore(current) || current.add(16, 'days').isAfter(date)
-          )
+      <ConfigProvider
+        theme={{
+          algorithm: theme.darkAlgorithm,
         }}
-        defaultValue={
-          (store.startDate &&
-            store.endDate && [
-              dayjs(new Date(store.startDate)),
-              dayjs(new Date(store.endDate)),
-            ]) ||
-          undefined
-        }
-        picker="date"
-        onChange={(date, strings) => {
-          if (strings.length === 2) {
-            store.saveDates(strings[0], strings[1])
+      >
+        <RangePicker
+          clearIcon={false}
+          disabledDate={(date) => {
+            // We can only get 16 days after today
+            const current = dayjs()
+            return !(
+              date.isBefore(current) || current.add(16, 'days').isAfter(date)
+            )
+          }}
+          defaultValue={
+            (store.startDate &&
+              store.endDate && [
+                dayjs(new Date(store.startDate)),
+                dayjs(new Date(store.endDate)),
+              ]) ||
+            undefined
           }
-        }}
-      />
+          picker="date"
+          onChange={(date, strings) => {
+            if (strings.length === 2) {
+              store.saveDates(strings[0], strings[1])
+            }
+          }}
+        />
+      </ConfigProvider>
       {(!store.startDate && !store.endDate && <p>Pick dates</p>) ||
         (store.startDate &&
           store.endDate &&

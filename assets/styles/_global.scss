@@ -19,3 +19,23 @@ strong {
   font-size: 36px;
   line-height: 42px;
 }
+
+.ant-picker-range {
+  background: var(--color-black-alt);
+  border: none;
+  border-radius: 0;
+  padding: 8px 24px;
+  height: 40px;
+}
+
+.ant-picker-input {
+  > input {
+    color: var(--color-white) !important;
+  }
+}
+
+.ant-picker-suffix {
+  svg {
+    fill: var(--color-white-40);
+  }
+}
