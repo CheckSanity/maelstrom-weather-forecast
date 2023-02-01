@@ -62,7 +62,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   const removeForecast = (latitude: number, longitude: number) => {
-    const currentForecasts = localStorage.forecasts || []
+    let currentForecasts: Forecast[] =
+      (localStorage.forecasts && JSON.parse(localStorage.forecasts)) || []
+
     if (currentForecasts.length === 0) {
       return
     }
@@ -72,7 +74,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({
         forecast.latitude != latitude && forecast.longitude != longitude
     )
 
-    localStorage.setItem('forecasts', currentForecasts)
+    localStorage.setItem('forecasts', JSON.stringify(updatedForecasts))
     setForecasts(updatedForecasts)
   }
 
